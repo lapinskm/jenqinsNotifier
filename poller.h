@@ -17,7 +17,6 @@ public:
     void start();
 
 private slots:
-    void jobListReady();
     void jobStatusReady(const QString &jobName);
 
 private:
@@ -25,7 +24,7 @@ private:
 
     QString m_host;
     int m_interval;
-    JobList *m_jobList;
+    QStringList m_watchedJobList;
     QHash <QString, BuildStatus*> m_jobsStatus;
 };
 

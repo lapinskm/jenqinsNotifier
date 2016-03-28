@@ -17,11 +17,13 @@ SOURCES = \
     xmlapihandler.cpp \
     networkmanagersingleton.cpp \
     poller.cpp \
-    buildstatus.cpp
+    buildstatus.cpp \
+    settingssingleton.cpp
 
 HEADERS += \
     joblist.h \
     xmlapihandler.h \
     networkmanagersingleton.h \
     poller.h \
-    buildstatus.h
+    buildstatus.h \
+    settingssingleton.h
