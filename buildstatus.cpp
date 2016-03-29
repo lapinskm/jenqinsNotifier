@@ -2,12 +2,11 @@
 
 #include <QDebug>
 #include <QDomDocument>
-#include <QUrl>
 
-QMap<QString, BuildStatus::buildResult> BuildStatus::m_stringToResultMap = QMap<QString, BuildStatus::buildResult>();
+QMap <QString, BuildStatus::buildResult> BuildStatus::m_stringToResultMap = QMap<QString, BuildStatus::buildResult>();
+
 BuildStatus::BuildStatus(QObject *parent)
-    : XmlApiHandler(parent)
-    , m_buildNumber (-1)
+    : BuildApiHandler(parent)
 {
     if(m_stringToResultMap.empty()) {
         m_stringToResultMap.insert("SUCCESS", success);
@@ -19,22 +18,19 @@ BuildStatus::BuildStatus(QObject *parent)
 
 void BuildStatus::processXml(const QDomDocument &xml)
 {
+    QDomNodeList numbers = xml.elementsByTagName("number");
+    if (!numbers.isEmpty()) {
+        bool ok;
+        int number = numbers.at(0).toElement().text().toInt(&ok);
+        if (ok)
+            m_buildNumber = number;
+        qDebug()<<Q_FUNC_INFO<<numbers.at(0).toElement().text();
+    }
     QDomNodeList results = xml.elementsByTagName("result");
     if (!results.isEmpty()) {
-        m_result=m_stringToResultMap.value(results.at(0).toElement().text(), noStatus);
+        m_result = m_stringToResultMap.value(results.at(0).toElement().text(), noStatus);
         qDebug()<<Q_FUNC_INFO<<results.at(0).toElement().text();
+        emit buildStatusReady(m_jobName, m_buildNumber);
     }
-    emit buildStatusReady(m_jobName);
-}
-
-QString BuildStatus::url() const
-{
-    QString ret = host();
-    if (!ret.endsWith("/"))
-        ret.append("/");
-    ret.append("job/");
-    ret.append(QUrl::toPercentEncoding(m_jobName));
-    ret.append("/");
-    ret.append(m_buildNumber==-1 ? "lastBuild" : QString::number(m_buildNumber));
-    return ret.append("/api/xml");
+    emit buildStatusReady(m_jobName, m_buildNumber);
 }

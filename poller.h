@@ -18,7 +18,7 @@ public:
     void start();
 
 private slots:
-    void jobStatusReady(const QString &jobName);
+    void jobStatusReady(const QString &jobName, int buildNumber);
 
 private:
     void timerEvent(QTimerEvent *);

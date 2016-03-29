@@ -24,6 +24,4 @@ private:
     QSettings* m_impl;
 };
 
-
-
 #endif // SETTINGSSINGLETON_H

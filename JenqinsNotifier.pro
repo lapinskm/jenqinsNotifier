@@ -18,7 +18,9 @@ SOURCES = \
     networkmanagersingleton.cpp \
     poller.cpp \
     buildstatus.cpp \
-    settingssingleton.cpp
+    settingssingleton.cpp \
+    buildapihandler.cpp \
+    apihandler.cpp \
 
 HEADERS += \
     joblist.h \
@@ -26,4 +28,6 @@ HEADERS += \
     networkmanagersingleton.h \
     poller.h \
     buildstatus.h \
-    settingssingleton.h
+    settingssingleton.h \
+    buildapihandler.h \
+    apihandler.h \

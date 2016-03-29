@@ -1,10 +1,11 @@
 #ifndef BUILDSTATUS_H
 #define BUILDSTATUS_H
 
-#include <xmlapihandler.h>
+#include "buildapihandler.h"
+
 #include <QMap>
 
-class BuildStatus : public XmlApiHandler
+class BuildStatus : public BuildApiHandler
 {
     Q_OBJECT
 public:
@@ -18,21 +19,17 @@ public:
     };
 
     BuildStatus(QObject * parent = nullptr);
-    void setJobName(QString jobName) { m_jobName = jobName; }
-    void setBuildNumber(int buildNumber = -1) { m_buildNumber = buildNumber; }
-    int buildNumber() const { return m_buildNumber; }
 
 signals:
-    void buildStatusReady(const QString &);
+    void buildStatusReady(const QString &, int);
 
 private:
     void processXml(const QDomDocument &xml);
-    QString url() const;
 
-    QString m_jobName;
-    buildResult m_result;
     static QMap<QString, buildResult> m_stringToResultMap;
-    int m_buildNumber;
+
+    int m_firstFailBuild;
+    buildResult m_result;
 };
 
 #endif // BUILDSTATUS_H

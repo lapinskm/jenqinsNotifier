@@ -1,32 +1,22 @@
 #ifndef XMLAPIHANDLER_H
 #define XMLAPIHANDLER_H
 
+#include "apihandler.h"
+
 #include <QObject>
 
-class QNetworkReply;
 class QDomDocument;
 
-class XmlApiHandler: public QObject
+class XmlApiHandler: public ApiHandler
 {
     Q_OBJECT
 public:
-    XmlApiHandler(QObject * parent = nullptr)
-        : QObject(parent), m_reply(nullptr) {}
-    void setHost(QString const &host) { m_host = host; }
-    QString host() const { return m_host; }
-    void fetchData();
-
+    XmlApiHandler(QObject * parent = nullptr) : ApiHandler(parent) {}
 protected:
-    virtual QString url() const = 0;
     virtual void processXml(const QDomDocument&) = 0;
 
-private slots:
-    void requestFinished();
-
 private:
-    QString m_host;
-    QNetworkReply * m_reply;
-    QString m_prevRedirect;
+    void processReply(const QString &);
 };
 
 #endif // XMLAPIHANDLER_H
