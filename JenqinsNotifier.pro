@@ -21,6 +21,7 @@ SOURCES = \
     settingssingleton.cpp \
     buildapihandler.cpp \
     apihandler.cpp \
+    buildchanges.cpp \
 
 HEADERS += \
     joblist.h \
@@ -31,3 +32,4 @@ HEADERS += \
     settingssingleton.h \
     buildapihandler.h \
     apihandler.h \
+    buildchanges.h \
