@@ -1,6 +1,5 @@
 #include "poller.h"
-#include "joblist.h"
-#include "buildstatus.h"
+#include "jenkinsApi/buildstatus.h"
 #include "settingssingleton.h"
 
 #include <QDebug>
@@ -36,7 +35,8 @@ void Poller::timerEvent(QTimerEvent *)
         stat->setHost(m_host);
         stat->setJobName(jobName);
         m_jobsStatus.insert(jobName, stat);
-        connect(stat, SIGNAL(buildStatusReady(const QString &, int)), this, SLOT(jobStatusReady(const QString &, int)) );
+        connect(stat, SIGNAL(buildStatusReady(const QString &, int)),
+                this, SLOT(jobStatusReady(const QString &, int)) );
         stat->fetchData();
     }
 }

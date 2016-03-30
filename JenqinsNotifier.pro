@@ -13,25 +13,26 @@ TEMPLATE = app
 
 SOURCES = \
     main.cpp \
-    joblist.cpp \
-    xmlapihandler.cpp \
     networkmanagersingleton.cpp \
-    poller.cpp \
-    buildstatus.cpp \
     settingssingleton.cpp \
-    buildapihandler.cpp \
-    apihandler.cpp \
-    buildchanges.cpp \
-    lastsuccesbuildnumber.cpp \
+    poller.cpp \
+    jenkinsApi/apihandler.cpp \
+    jenkinsApi/lastsuccesbuildnumber.cpp \
+    jenkinsApi/xmlapihandler.cpp \
+    jenkinsApi/joblist.cpp \
+    jenkinsApi/buildapihandler.cpp \
+    jenkinsApi/buildstatus.cpp \
+    jenkinsApi/buildchanges.cpp \
 
-HEADERS += \
-    joblist.h \
-    xmlapihandler.h \
+HEADERS = \
     networkmanagersingleton.h \
-    poller.h \
-    buildstatus.h \
     settingssingleton.h \
-    buildapihandler.h \
-    apihandler.h \
-    buildchanges.h \
-    lastsuccesbuildnumber.h \
+    poller.h \
+    jenkinsApi/apihandler.h \
+    jenkinsApi/lastsuccesbuildnumber.h \
+    jenkinsApi/xmlapihandler.h \
+    jenkinsApi/joblist.h \
+    jenkinsApi/buildapihandler.h \
+    jenkinsApi/buildstatus.h \
+    jenkinsApi/buildchanges.h \
+
