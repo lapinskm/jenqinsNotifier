@@ -22,6 +22,7 @@ SOURCES = \
     buildapihandler.cpp \
     apihandler.cpp \
     buildchanges.cpp \
+    lastsuccesbuildnumber.cpp \
 
 HEADERS += \
     joblist.h \
@@ -33,3 +34,4 @@ HEADERS += \
     buildapihandler.h \
     apihandler.h \
     buildchanges.h \
+    lastsuccesbuildnumber.h \
