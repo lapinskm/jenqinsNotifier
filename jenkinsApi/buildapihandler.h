@@ -6,10 +6,10 @@
 class BuildApiHandler : public XmlApiHandler
 {
 public:
-    BuildApiHandler(QObject *parent = nullptr) : XmlApiHandler(parent), m_buildNumber (-1) {}
+    BuildApiHandler(const QString & host, const QString & jobName, int buildNumber = -1,  QObject *parent = nullptr)
+        : XmlApiHandler(host, parent), m_jobName(jobName), m_buildNumber (buildNumber) {}
     QString url() const;
 
-    void setJobName(const QString &jobName) { m_jobName = jobName; }
     void setBuildNumber(int buildNumber) { m_buildNumber = buildNumber; }
 
 protected:

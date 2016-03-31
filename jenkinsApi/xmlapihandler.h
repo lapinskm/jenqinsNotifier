@@ -11,7 +11,8 @@ class XmlApiHandler: public ApiHandler
 {
     Q_OBJECT
 public:
-    XmlApiHandler(QObject * parent = nullptr) : ApiHandler(parent) {}
+    XmlApiHandler(const QString & host, QObject * parent = nullptr)
+        : ApiHandler(host, parent) {}
 protected:
     virtual void processXml(const QDomDocument&) = 0;
 

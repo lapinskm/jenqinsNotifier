@@ -28,6 +28,7 @@ HEADERS = \
     networkmanagersingleton.h \
     settingssingleton.h \
     poller.h \
+    buildresult.h \
     jenkinsApi/apihandler.h \
     jenkinsApi/lastsuccesbuildnumber.h \
     jenkinsApi/xmlapihandler.h \

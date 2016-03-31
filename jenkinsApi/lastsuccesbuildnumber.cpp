@@ -10,10 +10,10 @@ void LastSuccesBuildNumber::processReply(const QString & reply)
         qWarning()<<Q_FUNC_INFO<<"No number in reply!!! Reply: "<<reply;
         number = -1;
     }
-    emit buildNumberReady(m_jobName, number);
+    emit buildNumberReady(number);
 }
 
-QString LastSuccesBuildNumber::url()
+QString LastSuccesBuildNumber::url() const
 {
     QString ret = host();
     if (!ret.endsWith("/"))

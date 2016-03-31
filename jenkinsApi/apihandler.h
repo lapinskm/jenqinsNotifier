@@ -9,10 +9,9 @@ class ApiHandler : public QObject
 {
     Q_OBJECT
 public:
-    ApiHandler(QObject *parent = nullptr)
-      : QObject(parent), m_reply(nullptr) {}
+    ApiHandler(const QString & host, QObject *parent = nullptr)
+      : QObject(parent),m_host(host), m_reply(nullptr) {}
 public:
-    void setHost(QString const &host) { m_host = host; }
     QString host() const { return m_host; }
     void fetchData();
 

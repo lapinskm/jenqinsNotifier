@@ -2,6 +2,7 @@
 #define BUILDSTATUS_H
 
 #include "buildapihandler.h"
+#include "buildresult.h"
 
 #include <QMap>
 
@@ -9,16 +10,7 @@ class BuildStatus : public BuildApiHandler
 {
     Q_OBJECT
 public:
-    enum buildResult{
-        noStatus = 0,
-        success = 1,
-        failure = 2,
-        aborted = 3,
-        unstable = 4,
-        end
-    };
-
-    BuildStatus(QObject * parent = nullptr);
+    BuildStatus(const QString & host, const QString & jobName, int buildNumber = -1, QObject * parent = nullptr);
 
 signals:
     void buildStatusReady(const QString &, int);
@@ -26,10 +18,9 @@ signals:
 private:
     void processXml(const QDomDocument &xml);
 
-    static QMap<QString, buildResult> m_stringToResultMap;
+    static QMap<QString, BuildResult> m_stringToResultMap;
 
-    int m_firstFailBuild;
-    buildResult m_result;
+    BuildResult m_result;
 };
 
 #endif // BUILDSTATUS_H

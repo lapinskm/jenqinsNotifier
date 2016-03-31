@@ -1,6 +1,8 @@
 #ifndef POLLER_H
 #define POLLER_H
 
+#include "buildresult.h"
+
 #include <QObject>
 #include <QHash>
 #include <QStringList>
@@ -16,6 +18,9 @@ public:
     void setInterval(int interval){m_interval = interval;}
     void setHost(QString host);
     void start();
+
+signals:
+    void newBuildStatusInformation(const QString &jobName, int buildNumber, BuildResult result);
 
 private slots:
     void jobStatusReady(const QString &jobName, int buildNumber);

@@ -3,10 +3,10 @@
 #include <QDebug>
 #include <QDomDocument>
 
-QMap <QString, BuildStatus::buildResult> BuildStatus::m_stringToResultMap = QMap<QString, BuildStatus::buildResult>();
+QMap <QString, BuildResult> BuildStatus::m_stringToResultMap = QMap<QString, BuildResult>();
 
-BuildStatus::BuildStatus(QObject *parent)
-    : BuildApiHandler(parent)
+BuildStatus::BuildStatus(const QString &host, const QString &jobName, int buildNumber, QObject *parent)
+    : BuildApiHandler(host,jobName, buildNumber, parent)
 {
     if(m_stringToResultMap.empty()) {
         m_stringToResultMap.insert("SUCCESS", success);

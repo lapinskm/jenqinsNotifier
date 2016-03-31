@@ -21,7 +21,6 @@ void Poller::start()
 void Poller::jobStatusReady(const QString & jobName, int buildNumber)
 {
     qDebug()<<Q_FUNC_INFO<<jobName<<" "<<buildNumber;
-    //TODO: Check state of job and notify if number of build has changed.
     if (m_jobsStatus.contains(jobName)) {
         delete m_jobsStatus.value(jobName);
         m_jobsStatus.remove(jobName);
@@ -31,9 +30,7 @@ void Poller::jobStatusReady(const QString & jobName, int buildNumber)
 void Poller::timerEvent(QTimerEvent *)
 {
     foreach(QString jobName, m_watchedJobList) {
-        BuildStatus * stat = new BuildStatus();
-        stat->setHost(m_host);
-        stat->setJobName(jobName);
+        BuildStatus * stat = new BuildStatus(m_host, jobName);
         m_jobsStatus.insert(jobName, stat);
         connect(stat, SIGNAL(buildStatusReady(const QString &, int)),
                 this, SLOT(jobStatusReady(const QString &, int)) );

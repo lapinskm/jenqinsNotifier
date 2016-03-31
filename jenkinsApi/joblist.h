@@ -7,7 +7,7 @@ class JobList :public XmlApiHandler
 {
     Q_OBJECT
 public:
-    JobList(QObject *parent = nullptr) : XmlApiHandler(parent) {}
+    JobList(const QString & host, QObject *parent = nullptr) : XmlApiHandler(host, parent) {}
     QList<QString> jobNames() const { return m_jobNames; }
 
 signals:

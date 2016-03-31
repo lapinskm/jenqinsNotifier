@@ -7,15 +7,15 @@ class LastSuccesBuildNumber : public ApiHandler
 {
     Q_OBJECT
 public:
-    LastSuccesBuildNumber(QObject * parent = nullptr) : ApiHandler(parent) {}
-    void setJobName(const QString &jobName) { m_jobName = jobName; }
+    LastSuccesBuildNumber(const QString & host, const QString & jobName, QObject * parent = nullptr)
+        : ApiHandler(host, parent), m_jobName(jobName) {}
 
 signals:
-    void buildNumberReady(QString JobName, int number);
+    void buildNumberReady(int number);
 
 private:
     void processReply(const QString &);
-    QString url();
+    QString url() const;
 
     QString m_jobName;
 };
