@@ -22,7 +22,7 @@ SOURCES = \
     jenkinsApi/joblist.cpp \
     jenkinsApi/buildapihandler.cpp \
     jenkinsApi/buildstatus.cpp \
-    jenkinsApi/buildchanges.cpp \
+    jenkinsApi/changesinfo.cpp \
 
 HEADERS = \
     networkmanagersingleton.h \
@@ -34,5 +34,5 @@ HEADERS = \
     jenkinsApi/joblist.h \
     jenkinsApi/buildapihandler.h \
     jenkinsApi/buildstatus.h \
-    jenkinsApi/buildchanges.h \
+    jenkinsApi/changesinfo.h \
 

@@ -1,4 +1,4 @@
-#include "buildchanges.h"
+#include "changesinfo.h"
 
 #include <QDomDocument>
 #include <QDebug>
