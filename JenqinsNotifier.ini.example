@@ -1,4 +1,0 @@
-jenkins_url="http://127.0.0.1;
-watched_jobs="build_name1","build_name2","build_name3";
-#in milliseconds
-poll_interval=6000; 

@@ -1,21 +1,40 @@
 #include "settingssingleton.h"
 
+#include "xmlutils.h"
+
 #include <QCoreApplication>
 #include <QDebug>
+#include <QDomDocument>
+#include <QFile>
+#include <QStandardPaths>
+
+const QString SettingsSingleton::m_dataFileName = "jenqinsNotifierData.xml";
 
 SettingsSingleton::SettingsSingleton()
+    : m_jenkinsUrl ("https://127.0.0.1:8080")
+    , m_interval (10000)
 {
-    QString iniPath = QCoreApplication::applicationFilePath();
+    m_dataFilePath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
 #ifdef WIN32
-    iniPath.replace(".exe", "");
+    if (!m_dataFilePath.endsWith("\\"))
+        m_dataFilePath.append("\\");
+#else
+    if (!m_dataFilePath.endsWith("/"))
+       m_dataFilePath.append("/");
 #endif
-    iniPath.append(".ini");
-    m_impl = new QSettings(iniPath, QSettings::IniFormat);
+    QFile dataFile(m_dataFilePath.append(m_dataFileName));
+    if  (!dataFile.open(QFile::ReadOnly) ) {
+        qCritical()<<Q_FUNC_INFO<<"cannot open file: "<<m_dataFilePath;
+    }
+    else {
+        parseXml(dataFile.readAll());
+    }
+    dataFile.close();
 }
 
 SettingsSingleton::~SettingsSingleton()
 {
-    delete m_impl;
+    //TODO: Save data to file.
 }
 
 SettingsSingleton &SettingsSingleton::instance()
@@ -24,33 +43,25 @@ SettingsSingleton &SettingsSingleton::instance()
     return inst;
 }
 
-QString SettingsSingleton::jenkinsUrl()
+void SettingsSingleton::parseXml(const QByteArray & xml)
 {
-    return m_impl->value("jenkins_url", "https://127.0.0.1").toString();
-}
-
-void SettingsSingleton::setJenkinsUrl(QString url)
-{
-    m_impl->setValue("jenkins_url", url);
-}
-
-QStringList SettingsSingleton::watchedJobs()
-{
-    qDebug()<<m_impl->value("watched_jobs");
-    return  m_impl->value("watched_jobs").toStringList();
-}
-
-void SettingsSingleton::setWatchedJobs(QStringList jobs)
-{
-     m_impl->setValue("watched_jobs", jobs);
-}
-
-int SettingsSingleton::pollInterval()
-{
-    return  m_impl->value("poll_interval").toInt();
-}
-
-void SettingsSingleton::setPollInterval(int interval)
-{
-     m_impl->setValue("poll_interval", interval);
+    QDomDocument doc;
+    if (!doc.setContent(xml)) {
+        qCritical()<<Q_FUNC_INFO<<"File is not a xml document!!!";
+        return;
+    }
+    QDomElement root = doc.documentElement();
+    m_interval = XmlUtils::elementTextByPath(root,"interval").toInt();
+    m_jenkinsUrl = XmlUtils::elementTextByPath(root,"jenqins_url");
+    QDomNodeList rulesNodes = root.elementsByTagName("notyfication_rules");
+    m_rulesData.clear();
+    if(!rulesNodes.isEmpty())
+    {
+        QDomElement rulesElement = rulesNodes.at(0).toElement();
+        QDomNodeList ruleNodes = rulesElement.elementsByTagName("rule");
+        for(int i = 0; i< ruleNodes.size(); ++i ) {
+            NotyficationRuleData ruleData(ruleNodes.at(i).toElement());
+            m_rulesData.insert(ruleData.jobName(),ruleData);
+        }
+    }
 }

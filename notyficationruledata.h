@@ -16,6 +16,7 @@ public:
     QDomElement toXml(QDomDocument &doc) const;
     void setSettingData(const QString & jobName, bool notifyFailures, bool filterByCommiter,
                         const QStringList & commiters, bool notifyEndOfFailSpree);
+    QString jobName() { return m_jobName; }
 
 private:
     int m_lastBuildNumber;

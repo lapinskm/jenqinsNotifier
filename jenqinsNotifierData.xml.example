@@ -1,0 +1,27 @@
+<root>
+	<jenqins_url>https://127.0.0.1:8080</jenqins_url>
+	<interval>5000</interval>
+	<notyfication_rules>
+		<rule>
+			<job_name>build_1</job_name>
+			<notify_failures>true</notify_failures>
+			<filter_by_committers>true</filter_by_committers>
+			<committers>	
+				<committer>Alice</committer>
+				<committer>Bob</committer>
+			</committers>
+			<last_build_number>10</last_build_number>
+			<last_buid_result>1</last_buid_result>
+			<notify_end_of_fail_spree>false</notify_end_of_fail_spree>
+		</rule>
+		<rule>
+			<job_name>build_2</job_name>
+			<notify_failures>true</notify_failures>
+			<filter_by_committers>false</filter_by_committers>
+			<committers/>
+			<last_build_number>22</last_build_number>
+			<last_buid_result>3</last_buid_result>
+			<notify_end_of_fail_spree>false</notify_end_of_fail_spree>
+		</rule>
+	</notyfication_rules>
+</root>
