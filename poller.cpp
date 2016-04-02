@@ -14,13 +14,16 @@ Poller::Poller(QObject *parent)
 
 void Poller::start()
 {
-    qDebug()<<Q_FUNC_INFO;
-    startTimer(m_interval);
+    qDebug() << Q_FUNC_INFO << "interval:" << m_interval;
+    if( 0 < m_interval )
+        startTimer(m_interval);
+    else
+        qWarning() << Q_FUNC_INFO << "Interval should be greater than 0 !!!";
 }
 
 void Poller::jobStatusReady(const QString & jobName, int buildNumber)
 {
-    qDebug()<<Q_FUNC_INFO<<jobName<<" "<<buildNumber;
+    qDebug() << Q_FUNC_INFO << jobName << " " << buildNumber;
     if (m_jobsStatus.contains(jobName)) {
         delete m_jobsStatus.value(jobName);
         m_jobsStatus.remove(jobName);
