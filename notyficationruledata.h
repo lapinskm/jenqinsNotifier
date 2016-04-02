@@ -8,20 +8,16 @@
 class QDomElement;
 class QDomDocument;
 
-class notyficationRuleData
+class NotyficationRuleData
 {
 public:
-    notyficationRuleData(const QDomElement &ruleDataElement);
-    notyficationRuleData();
+    NotyficationRuleData(const QDomElement &ruleDataElement);
+    NotyficationRuleData();
     QDomElement toXml(QDomDocument &doc) const;
     void setSettingData(const QString & jobName, bool notifyFailures, bool filterByCommiter,
                         const QStringList & commiters, bool notifyEndOfFailSpree);
 
 private:
-
-    static void appendTextElement(QDomDocument & doc, QDomElement & parent,
-                           const QString & tagname, const QString & text);
-    static QString childTextByTagName(const QDomElement & parent, const QString & tagname);
     int m_lastBuildNumber;
     BuildResult m_lastResult;
 

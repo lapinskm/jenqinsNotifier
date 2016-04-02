@@ -24,6 +24,7 @@ SOURCES = \
     jenkinsApi/buildstatus.cpp \
     jenkinsApi/changesinfo.cpp \
     notyficationruledata.cpp \
+    xmlutils.cpp \
 
 HEADERS = \
     networkmanagersingleton.h \
@@ -38,4 +39,5 @@ HEADERS = \
     jenkinsApi/buildstatus.h \
     jenkinsApi/changesinfo.h \
     notyficationruledata.h \
+    xmlutils.h \
 
