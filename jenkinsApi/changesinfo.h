@@ -9,7 +9,6 @@ struct ChangeItem
 {
     QString m_author;
     QString m_revision;
-    QString m_repo;
 };
 
 class ChangesInfo : public BuildApiHandler
@@ -23,7 +22,7 @@ signals:
 
 private:
     void processXml(const QDomDocument &xml);
-    QString url();
+    QString url() const;
 };
 
 #endif // CHANGESINFO_H
