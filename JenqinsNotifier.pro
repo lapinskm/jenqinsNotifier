@@ -23,7 +23,7 @@ SOURCES = \
     jenkinsApi/buildapihandler.cpp \
     jenkinsApi/buildstatus.cpp \
     jenkinsApi/changesinfo.cpp \
-    notyficationruledata.cpp \
+    notificationruledata.cpp \
     xmlutils.cpp \
 
 HEADERS = \
@@ -38,6 +38,6 @@ HEADERS = \
     jenkinsApi/buildapihandler.h \
     jenkinsApi/buildstatus.h \
     jenkinsApi/changesinfo.h \
-    notyficationruledata.h \
+    notificationruledata.h \
     xmlutils.h \
 

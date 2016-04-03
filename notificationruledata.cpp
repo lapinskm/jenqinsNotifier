@@ -1,9 +1,9 @@
-#include "notyficationruledata.h"
+#include "notificationruledata.h"
 #include "xmlutils.h"
 
 #include <QDomDocument>
 
-NotyficationRuleData::NotyficationRuleData()
+NotificationRuleData::NotificationRuleData()
     : m_lastBuildNumber (-1)
     , m_lastResult (noStatus)
     , m_jobName ("")
@@ -12,7 +12,7 @@ NotyficationRuleData::NotyficationRuleData()
     , m_notifyEndOfFailSpree (false)
 {}
 
-NotyficationRuleData::NotyficationRuleData(const QDomElement & ruleDataElement)
+NotificationRuleData::NotificationRuleData(const QDomElement & ruleDataElement)
 {
     m_jobName = XmlUtils::elementTextByPath(ruleDataElement, "job_name");
     m_notifyFailures = XmlUtils::elementTextByPath(ruleDataElement,"notify_failures").contains("true");
@@ -29,7 +29,7 @@ NotyficationRuleData::NotyficationRuleData(const QDomElement & ruleDataElement)
     m_notifyEndOfFailSpree = XmlUtils::elementTextByPath(ruleDataElement,"notify_end_of_fail_spree").contains("true");
 }
 
-QDomElement NotyficationRuleData::toXml(QDomDocument &doc) const
+QDomElement NotificationRuleData::toXml(QDomDocument &doc) const
 {
     QDomElement ruleDataElement = doc.createElement("rule");
 
@@ -47,7 +47,7 @@ QDomElement NotyficationRuleData::toXml(QDomDocument &doc) const
     return ruleDataElement;
 }
 
-void NotyficationRuleData::setSettingData(const QString & jobName, bool notifyFailures, bool filterByCommiter,
+void NotificationRuleData::setSettingData(const QString & jobName, bool notifyFailures, bool filterByCommiter,
                                           const QStringList & commiters, bool notifyEndOfFailSpree)
 {
     if(jobName != m_jobName) {

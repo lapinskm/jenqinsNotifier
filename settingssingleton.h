@@ -1,7 +1,7 @@
 #ifndef SETTINGSSINGLETON_H
 #define SETTINGSSINGLETON_H
 
-#include "notyficationruledata.h"
+#include "notificationruledata.h"
 
 #include <QHash>
 
@@ -15,7 +15,7 @@ public:
     QString jenkinsUrl() { return m_jenkinsUrl; }
     void setJenkinsUrl(QString url) { m_jenkinsUrl = url; }
     QStringList watchedJobs() { return  m_rulesData.keys(); }
-    void setRuleData(const QHash<QString, NotyficationRuleData> & ruleData)
+    void setRuleData(const QHash<QString, NotificationRuleData> & ruleData)
     { m_rulesData = ruleData; }
     int pollInterval() { return m_interval; }
     void setPollInterval(int interval) {  m_interval = interval; }
@@ -26,7 +26,7 @@ public:
 private:
     void parseXml(const QByteArray &);
 
-    QHash <QString, NotyficationRuleData> m_rulesData;
+    QHash <QString, NotificationRuleData> m_rulesData;
     QString m_jenkinsUrl;
     int m_interval;
 

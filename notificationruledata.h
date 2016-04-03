@@ -1,5 +1,5 @@
-#ifndef NOTYFICATIONRULEDATA_H
-#define NOTYFICATIONRULEDATA_H
+#ifndef NOTIFICATIONRULEDATA_H
+#define NOTIFICATIONRULEDATA_H
 
 #include <QStringList>
 
@@ -8,11 +8,11 @@
 class QDomElement;
 class QDomDocument;
 
-class NotyficationRuleData
+class NotificationRuleData
 {
 public:
-    NotyficationRuleData(const QDomElement &ruleDataElement);
-    NotyficationRuleData();
+    NotificationRuleData(const QDomElement &ruleDataElement);
+    NotificationRuleData();
     QDomElement toXml(QDomDocument &doc) const;
     void setSettingData(const QString & jobName, bool notifyFailures, bool filterByCommiter,
                         const QStringList & commiters, bool notifyEndOfFailSpree);
@@ -30,4 +30,4 @@ private:
     bool m_notifyEndOfFailSpree;
 };
 
-#endif // NOTYFICATIONRULEDATA_H
+#endif // NOTIFICATIONRULEDATA_H
