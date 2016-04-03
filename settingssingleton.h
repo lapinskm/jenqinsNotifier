@@ -14,9 +14,11 @@ public:
 
     QString jenkinsUrl() { return m_jenkinsUrl; }
     void setJenkinsUrl(QString url) { m_jenkinsUrl = url; }
-    QStringList watchedJobs() { return  m_rulesData.keys(); }
-    void setRuleData(const QHash<QString, NotificationRuleData> & ruleData)
+
+    void setRuleData(const QList<NotificationRuleData> & ruleData)
     { m_rulesData = ruleData; }
+    QList <NotificationRuleData> ruleData() { return m_rulesData; }
+
     int pollInterval() { return m_interval; }
     void setPollInterval(int interval) {  m_interval = interval; }
 
@@ -26,7 +28,7 @@ public:
 private:
     void parseXml(const QByteArray &);
 
-    QHash <QString, NotificationRuleData> m_rulesData;
+    QList <NotificationRuleData> m_rulesData;
     QString m_jenkinsUrl;
     int m_interval;
 

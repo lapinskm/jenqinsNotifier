@@ -13,14 +13,12 @@ public:
     BuildStatus(const QString & host, const QString & jobName, int buildNumber = -1, QObject * parent = nullptr);
 
 signals:
-    void buildStatusReady(const QString &, int);
+    void buildStatusReady(int buildNumber, const BuildResult &);
 
 private:
     void processXml(const QDomDocument &xml);
 
     static QMap<QString, BuildResult> m_stringToResultMap;
-
-    BuildResult m_result;
 };
 
 #endif // BUILDSTATUS_H

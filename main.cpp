@@ -1,10 +1,10 @@
 #include <QCoreApplication>
-#include "poller.h"
+#include "notificationlogic.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    Poller p;
-    p.start();
+    NotificationLogic logic;
+    logic.start();
     return a.exec();
 }

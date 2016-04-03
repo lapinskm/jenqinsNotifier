@@ -61,7 +61,7 @@ void SettingsSingleton::parseXml(const QByteArray & xml)
         QDomNodeList ruleNodes = rulesElement.elementsByTagName("rule");
         for(int i = 0; i< ruleNodes.size(); ++i ) {
             NotificationRuleData ruleData(ruleNodes.at(i).toElement());
-            m_rulesData.insert(ruleData.jobName(),ruleData);
+            m_rulesData.append(ruleData);
         }
     }
 }

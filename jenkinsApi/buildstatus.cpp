@@ -1,4 +1,5 @@
 #include "buildstatus.h"
+#include "xmlutils.h"
 
 #include <QDebug>
 #include <QDomDocument>
@@ -18,19 +19,7 @@ BuildStatus::BuildStatus(const QString &host, const QString &jobName, int buildN
 
 void BuildStatus::processXml(const QDomDocument &xml)
 {
-    QDomNodeList numbers = xml.elementsByTagName("number");
-    if (!numbers.isEmpty()) {
-        bool ok;
-        int number = numbers.at(0).toElement().text().toInt(&ok);
-        if (ok)
-            m_buildNumber = number;
-        qDebug()<<Q_FUNC_INFO<<numbers.at(0).toElement().text();
-    }
-    QDomNodeList results = xml.elementsByTagName("result");
-    if (!results.isEmpty()) {
-        m_result = m_stringToResultMap.value(results.at(0).toElement().text(), noStatus);
-        qDebug()<<Q_FUNC_INFO<<results.at(0).toElement().text();
-        emit buildStatusReady(m_jobName, m_buildNumber);
-    }
-    emit buildStatusReady(m_jobName, m_buildNumber);
+    int buildNumber = XmlUtils::elementTextByPath(xml.documentElement(),"number").toInt();
+    BuildResult result  = m_stringToResultMap.value(XmlUtils::elementTextByPath(xml.documentElement(), "result"), noStatus);
+    emit buildStatusReady(buildNumber, result);
 }

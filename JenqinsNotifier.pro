@@ -15,7 +15,6 @@ SOURCES = \
     main.cpp \
     networkmanagersingleton.cpp \
     settingssingleton.cpp \
-    poller.cpp \
     jenkinsApi/apihandler.cpp \
     jenkinsApi/lastsuccesbuildnumber.cpp \
     jenkinsApi/xmlapihandler.cpp \
@@ -24,12 +23,13 @@ SOURCES = \
     jenkinsApi/buildstatus.cpp \
     jenkinsApi/changesinfo.cpp \
     notificationruledata.cpp \
+    notificationrule.cpp \
+    notificationlogic.cpp \
     xmlutils.cpp \
 
 HEADERS = \
     networkmanagersingleton.h \
     settingssingleton.h \
-    poller.h \
     buildresult.h \
     jenkinsApi/apihandler.h \
     jenkinsApi/lastsuccesbuildnumber.h \
@@ -39,5 +39,7 @@ HEADERS = \
     jenkinsApi/buildstatus.h \
     jenkinsApi/changesinfo.h \
     notificationruledata.h \
+    notificationrule.h \
+    notificationlogic.h \
     xmlutils.h \
 
