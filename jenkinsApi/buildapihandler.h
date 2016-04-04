@@ -11,6 +11,7 @@ public:
     QString url() const;
 
     void setBuildNumber(int buildNumber) { m_buildNumber = buildNumber; }
+    int buildNumber() { return m_buildNumber; }
 
 protected:
     QString m_jobName;

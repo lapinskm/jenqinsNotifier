@@ -19,7 +19,10 @@ BuildStatus::BuildStatus(const QString &host, const QString &jobName, int buildN
 
 void BuildStatus::processXml(const QDomDocument &xml)
 {
-    int buildNumber = XmlUtils::elementTextByPath(xml.documentElement(),"number").toInt();
+    bool ok;
+    int buildNumber = XmlUtils::elementTextByPath(xml.documentElement(),"number").toInt(&ok);
+    if (!ok)
+        buildNumber = -2;
     BuildResult result  = m_stringToResultMap.value(XmlUtils::elementTextByPath(xml.documentElement(), "result"), noStatus);
     emit buildStatusReady(buildNumber, result);
 }

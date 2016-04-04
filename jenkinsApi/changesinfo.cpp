@@ -4,6 +4,12 @@
 #include <QDomDocument>
 #include <QDebug>
 
+void ChangesInfo::fetchData(int buildNumber)
+{
+    setBuildNumber(buildNumber);
+    BuildApiHandler::fetchData();
+}
+
 void ChangesInfo::processXml(const QDomDocument &xml)
 {
     QList<ChangeItem> changes;
@@ -18,7 +24,7 @@ void ChangesInfo::processXml(const QDomDocument &xml)
             changes.append(item);
         }
     }
-    emit changeListReady(changes);
+    emit changeListReady(buildNumber(), changes);
 }
 
 QString ChangesInfo::url() const

@@ -13,8 +13,9 @@ class ChangesInfo : public BuildApiHandler
 public:
     ChangesInfo(const QString & host,const QString & jobName, int buildNumber = -1, QObject *parent = nullptr)
         : BuildApiHandler(host, jobName, buildNumber, parent) {}
+    void fetchData(int buildNumber);
 signals:
-    void changeListReady(QList<ChangeItem>);
+    void changeListReady(int buildNumber, QList<ChangeItem>);
 
 private:
     void processXml(const QDomDocument &xml);
