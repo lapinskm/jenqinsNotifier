@@ -22,7 +22,7 @@ SOURCES = \
     jenkinsApi/buildapihandler.cpp \
     jenkinsApi/buildstatus.cpp \
     jenkinsApi/changesinfo.cpp \
-    notificationruledata.cpp \
+    dataTypes/notificationruledata.cpp \
     notificationrule.cpp \
     notificationlogic.cpp \
     xmlutils.cpp \
@@ -30,7 +30,6 @@ SOURCES = \
 HEADERS = \
     networkmanagersingleton.h \
     settingssingleton.h \
-    buildresult.h \
     jenkinsApi/apihandler.h \
     jenkinsApi/lastsuccesbuildnumber.h \
     jenkinsApi/xmlapihandler.h \
@@ -38,8 +37,12 @@ HEADERS = \
     jenkinsApi/buildapihandler.h \
     jenkinsApi/buildstatus.h \
     jenkinsApi/changesinfo.h \
-    notificationruledata.h \
+    dataTypes/buildresult.h \
+    dataTypes/changeitem.h \
+    dataTypes/notificationdata.h \
+    dataTypes/notificationruledata.h \
     notificationrule.h \
     notificationlogic.h \
     xmlutils.h \
+
 

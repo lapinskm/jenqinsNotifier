@@ -1,7 +1,7 @@
 #ifndef SETTINGSSINGLETON_H
 #define SETTINGSSINGLETON_H
 
-#include "notificationruledata.h"
+#include "dataTypes/notificationruledata.h"
 
 #include <QHash>
 

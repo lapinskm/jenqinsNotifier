@@ -16,13 +16,14 @@ public:
     QDomElement toXml(QDomDocument &doc) const;
     void setSettingData(const QString & jobName, bool notifyFailures, bool filterByCommiter,
                         const QStringList & commiters, bool notifyEndOfFailSpree);
+
     QString jobName() { return m_jobName; }
+    bool notifyFailures() { return m_notifyFailures; }
+    bool filterByCommiter() { return m_filterByCommiter; }
+    QStringList commiters() { return m_commiters; }
+    bool notifyEndOfFailSpree () { return m_notifyEndOfFailSpree; }
 
 private:
-    int m_lastBuildNumber;
-    BuildResult m_lastResult;
-
-    //setting data.
     QString m_jobName;
     bool m_notifyFailures;
     bool m_filterByCommiter;

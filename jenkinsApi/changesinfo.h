@@ -2,14 +2,10 @@
 #define CHANGESINFO_H
 
 #include "buildapihandler.h"
+#include "dataTypes/changeitem.h"
+
 #include <QString>
 #include <QList>
-
-struct ChangeItem
-{
-    QString m_author;
-    QString m_revision;
-};
 
 class ChangesInfo : public BuildApiHandler
 {

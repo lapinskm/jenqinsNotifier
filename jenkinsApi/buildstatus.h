@@ -2,7 +2,7 @@
 #define BUILDSTATUS_H
 
 #include "buildapihandler.h"
-#include "buildresult.h"
+#include "dataTypes/buildresult.h"
 
 #include <QMap>
 
