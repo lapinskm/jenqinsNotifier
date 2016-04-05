@@ -14,8 +14,9 @@ NotificationRule::NotificationRule(const NotificationRuleData & nrd, QObject * p
     , m_notifySuccess(false)
     , m_isFailSpree(false)
     , m_lastSuccessApi (new LastSuccesBuildNumber(m_host, m_data.jobName(), this))
-    , m_processing(true)
-
+    , m_processing(false)
+    , m_lastResult(success)
+    , m_lastRevelantResult(success)
 {
     connect(m_lastSuccessApi,SIGNAL(buildNumberReady(int)),this,SLOT(onLastSuccess(int)));
 }
@@ -47,9 +48,9 @@ void NotificationRule::jobStatusReady(int buildNumber, const BuildResult & resul
     m_lastResult = result;
     BuildResult lastRevelantResult = m_lastRevelantResult;
     if( resultIsRevelant (result) )
-    {
         m_lastRevelantResult = result;
-    }
+    else
+       return;
 
     //ignore if nothing changed
     if(lastNumber == buildNumber || lastResult == result)
@@ -129,13 +130,25 @@ void NotificationRule::checkNextBuild(int buildNumber)
     BuildStatus * bust = new BuildStatus(m_host, m_data.jobName(), buildNumber + 1);
     connect (bust, SIGNAL(buildStatusReady(int, const BuildResult &)),
              this, SLOT(suspectedStatusReady(int, const BuildResult &)));
-    m_buildStatusApi.insert(buildNumber, bust);
+    m_buildStatusApi.insert(buildNumber + 1, bust);
     bust->fetchData();
 }
 
 void NotificationRule::notify()
 {
+    qDebug()<<Q_FUNC_INFO<<" **************************************";
+    qDebug()<<m_host<<"/" << m_data.jobName() << "/" << m_lastBuildNumber;
+    qDebug()<<"filter by commiter: "<< m_data.filterByCommiter();
+    qDebug()<<"commiters:" << m_data.commiters();
+    qDebug()<<"notifyFailures:" << m_data.notifyFailures();
 
+    qDebug()<<"****************************** changes: ********************************";
+    foreach (ChangeItem it, m_suspectedChanges) {
+        qDebug()<<"author: "<<it.m_author<<" revision: "<<it.m_revision;
+    }
+    qDebug()<<"************************************************************************";
+    qDebug()<<"result"<<static_cast<int>(m_lastResult);
+    qDebug()<<"last revelant result"<<static_cast<int>(m_lastRevelantResult);
 }
 
 void NotificationRule::suspectedStatusReady(int buildNumber, const BuildResult & retult)
@@ -148,7 +161,7 @@ void NotificationRule::suspectedStatusReady(int buildNumber, const BuildResult &
 
     if(!m_processing)
         return;
-    Q_ASSERT(buildNumber == m_lastBuildNumber);
+    Q_ASSERT(buildNumber < m_lastBuildNumber);
     ChangesInfo * chin = new ChangesInfo(m_host, m_data.jobName(), buildNumber);
     if (retult == failure) {
         connect (chin, SIGNAL(changeListReady(int, const QList<ChangeItem> &)),
