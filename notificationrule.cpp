@@ -3,6 +3,7 @@
 #include "jenkinsApi/buildstatus.h"
 #include "jenkinsApi/changesinfo.h"
 #include "settingssingleton.h"
+#include "dataTypes/notificationdata.h"
 
 #include <QDomDocument>
 #include <QDebug>
@@ -149,6 +150,14 @@ void NotificationRule::notify()
     qDebug()<<"************************************************************************";
     qDebug()<<"result"<<static_cast<int>(m_lastResult);
     qDebug()<<"last revelant result"<<static_cast<int>(m_lastRevelantResult);
+
+    NotyficationData nd;
+    nd.m_jenkinsHost = m_host;
+    nd.m_jobName = m_data.jobName();
+    nd.m_buildNumber = m_lastBuildNumber;
+    nd.m_suspectedChanges = m_suspectedChanges;
+    nd.m_result = m_lastResult;
+    emit notify(nd);
 }
 
 void NotificationRule::suspectedStatusReady(int buildNumber, const BuildResult & retult)

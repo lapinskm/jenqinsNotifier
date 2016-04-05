@@ -11,7 +11,8 @@ struct NotyficationData {
     int m_buildNumber;
     QString m_jobName;
     QString m_jenkinsHost;
-    QList <ChangeItem> m_suspectedItems;
-}
+    QList <ChangeItem> m_suspectedChanges;
+    BuildResult m_result;
+};
 
 #endif // NOTIFICATIONDATA_H
