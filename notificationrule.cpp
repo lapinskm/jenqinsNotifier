@@ -14,10 +14,10 @@ NotificationRule::NotificationRule(const NotificationRuleData & nrd, QObject * p
     , m_data (nrd)
     , m_notifySuccess(false)
     , m_isFailSpree(false)
+    , m_lastRevelantResult(success)
+    , m_lastResult(success)
     , m_lastSuccessApi (new LastSuccesBuildNumber(m_host, m_data.jobName(), this))
     , m_processing(false)
-    , m_lastResult(success)
-    , m_lastRevelantResult(success)
 {
     connect(m_lastSuccessApi,SIGNAL(buildNumberReady(int)),this,SLOT(onLastSuccess(int)));
 }
