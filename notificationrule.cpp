@@ -162,7 +162,7 @@ void NotificationRule::notify()
 
 void NotificationRule::suspectedStatusReady(int buildNumber, const BuildResult & retult)
 {
-    if (buildNumber < 0) {
+    if (buildNumber <= 0) {
         qWarning() << Q_FUNC_INFO << "Invalid build number, stopping processing.";
         m_processing = false;
         return;
@@ -170,7 +170,7 @@ void NotificationRule::suspectedStatusReady(int buildNumber, const BuildResult &
 
     if(!m_processing)
         return;
-    Q_ASSERT(buildNumber < m_lastBuildNumber);
+    Q_ASSERT(buildNumber <= m_lastBuildNumber);
     ChangesInfo * chin = new ChangesInfo(m_host, m_data.jobName(), buildNumber);
     if (retult == failure) {
         connect (chin, SIGNAL(changeListReady(int, const QList<ChangeItem> &)),
