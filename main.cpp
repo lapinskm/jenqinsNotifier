@@ -1,10 +1,7 @@
-#include <QCoreApplication>
-#include "notificationlogic.h"
+#include "application.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
-    NotificationLogic logic;
-    logic.start();
+    Application a(argc, argv);
     return a.exec();
 }

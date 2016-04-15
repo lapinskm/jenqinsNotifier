@@ -1,7 +1,9 @@
-QT -= gui
+QT += gui
 QT += core
 QT += xml
 QT += network
+QT += widgets
+
 
 TARGET = JenqinsNotifier
 
@@ -13,6 +15,8 @@ TEMPLATE = app
 
 SOURCES = \
     main.cpp \
+    application.cpp \
+    singleinstanceguard.cpp \
     networkmanagersingleton.cpp \
     settingssingleton.cpp \
     jenkinsApi/apihandler.cpp \
@@ -28,6 +32,8 @@ SOURCES = \
     xmlutils.cpp \
 
 HEADERS = \
+    application.h \
+    singleinstanceguard.h \
     networkmanagersingleton.h \
     settingssingleton.h \
     jenkinsApi/apihandler.h \
