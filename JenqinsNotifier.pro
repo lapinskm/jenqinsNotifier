@@ -3,6 +3,8 @@ QT += core
 QT += xml
 QT += network
 QT += widgets
+QT += qml
+QT += quick
 
 
 TARGET = JenqinsNotifier
@@ -52,4 +54,7 @@ HEADERS = \
     notificationlogic.h \
     xmlutils.h \
     ui/uimanager.h \
+
+OTHER_FILES += \
+    ui/settings.qml
 
