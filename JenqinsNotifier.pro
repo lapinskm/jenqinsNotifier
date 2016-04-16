@@ -30,6 +30,7 @@ SOURCES = \
     notificationrule.cpp \
     notificationlogic.cpp \
     xmlutils.cpp \
+    ui/uimanager.cpp \
 
 HEADERS = \
     application.h \
@@ -50,5 +51,5 @@ HEADERS = \
     notificationrule.h \
     notificationlogic.h \
     xmlutils.h \
-
+    ui/uimanager.h \
 

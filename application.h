@@ -5,6 +5,7 @@
 
 class SingleInstanceGuard;
 class NotificationLogic;
+class UiManager;
 
 class Application : public QApplication
 {
@@ -17,10 +18,12 @@ signals:
 private slots:
     void onThisInstanceIsFirst();
     void onAnotherInstanceAlreadyExist();
+    void onUserWantToClose();
 
 private:
     SingleInstanceGuard * m_singleInstanceGuard;
     NotificationLogic * m_notificationLogic;
+    UiManager * m_uiManager;
 };
 
 #endif // APPLICATION_H
