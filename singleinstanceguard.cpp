@@ -62,13 +62,16 @@ void SingleInstanceGuard::connectionFailed(QLocalSocket::LocalSocketError err)
     }
     else {
         qWarning()<< Q_FUNC_INFO<<"Unable to connect. Possibly previous instance crashed. Trying to start server.";
-        if (!QLocalServer::removeServer(m_identyficationString))
+        if (!QLocalServer::removeServer(m_identyficationString)){
             emit errorOccured();
-        else if (!m_server->listen(m_identyficationString))
+        }
+        else if (!m_server->listen(m_identyficationString)) {
             qDebug()<<Q_FUNC_INFO<<err;
             emit errorOccured();
-        else
+        }
+        else{
             emit thisInstanceIsFirst();
+        }
     }
     clearLock();
 }
