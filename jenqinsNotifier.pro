@@ -7,7 +7,7 @@ QT += qml
 QT += quick
 
 
-TARGET = JenqinsNotifier
+TARGET = jenqinsNotifier
 
 CONFIG -= app_bundle
 CONFIG += c++11
