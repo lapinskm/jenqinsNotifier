@@ -56,5 +56,6 @@ HEADERS = \
     ui/uimanager.h \
 
 OTHER_FILES += \
-    ui/settings.qml
+    ui/settings.qml \
+    ui/mainView.qml \
 

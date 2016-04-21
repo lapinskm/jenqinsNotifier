@@ -17,6 +17,7 @@ Application::Application(int & argc, char *argv[])
     connect (m_singleInstanceGuard, SIGNAL(thisInstanceIsFirst()),
              this, SLOT(onThisInstanceIsFirst()));
     m_singleInstanceGuard->tryStart();
+    setQuitOnLastWindowClosed(false);
 }
 
 void Application::onThisInstanceIsFirst()
@@ -26,7 +27,7 @@ void Application::onThisInstanceIsFirst()
     m_notificationLogic = new NotificationLogic(this);
     m_uiManager = new UiManager(this);
     connect(m_singleInstanceGuard, SIGNAL(anotherInstanceTriedToStart()),
-            m_uiManager, SLOT(showSettings()));
+            m_uiManager, SLOT(showMainView()));
     connect(m_uiManager, SIGNAL(userWantToClose()), this, SLOT(onUserWantToClose()));
     m_notificationLogic->start();
 }

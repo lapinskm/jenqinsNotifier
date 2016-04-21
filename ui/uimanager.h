@@ -17,10 +17,13 @@ signals:
 
 public slots:
     void showNotification(const NotyficationData &);
+    void showMainView();
+private slots:
     void showSettings();
+    void closeButtonClicked();
 
 private:
-    QQuickView * m_settings;
+    QQuickView * m_view;
 
 };
 
