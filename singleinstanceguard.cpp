@@ -8,7 +8,7 @@
 
 SingleInstanceGuard::SingleInstanceGuard(QObject *parent)
     : QObject(parent)
-    , m_identyficationString (QString::fromUtf8("jenqinsNotifier"))
+    , m_identyficationString (QString::fromUtf8("jenqinsNotifierLock"))
     , m_lock(new QLockFile(m_identyficationString))
     , m_server(new QLocalServer(this))
     , m_socket(nullptr)
@@ -25,7 +25,10 @@ void SingleInstanceGuard::tryStart()
 {
     qDebug()<< Q_FUNC_INFO;
     Q_ASSERT(m_lock);
-    m_lock->removeStaleLockFile();
+    if (m_lock->isLocked())
+    {
+         qDebug()<< Q_FUNC_INFO<<m_lock->removeStaleLockFile();
+    }
     if (m_lock->lock()) {
         Q_ASSERT(nullptr == m_socket);
         m_socket = new QLocalSocket();
